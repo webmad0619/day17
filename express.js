@@ -18,6 +18,8 @@ const PORT = 3000
 // here you will load all the movies later on
 let movies
 
+app.use(express.static('public'));
+
 fs.readFile("./cleanData.json", "utf8", function(err, allMovies) {
     // here you load all the movies after using the readFile fs command of nodejs
     // here you parse the allMovies var which is a string and you 
@@ -40,6 +42,10 @@ app.get("/movies", (req, res) => {
     // here you use the movies variables which you previously loaded
     // using fs.readFile
     res.json(movies.filter((movie) => movie.year < 1980)[0])
+})
+
+app.get("/home", (req, res) => {
+    res.sendFile(__dirname + '/views/home.html');
 })
 
 app.listen(PORT)
