@@ -1,5 +1,3 @@
-// ruleta pero bien, para recordarlo luego: |RUBEN|
-
 // http://localhost:3000/
 // https://www.elpais.com:443
 // http://www.elpais.com:80
@@ -18,6 +16,8 @@ const PORT = 3000
 // here you will load all the movies later on
 let movies
 
+// this is the folder where you store static resources
+// like .css, .jpg, .js, etc
 app.use(express.static('public'));
 
 fs.readFile("./cleanData.json", "utf8", function(err, allMovies) {
