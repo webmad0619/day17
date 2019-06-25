@@ -2973,7 +2973,15 @@ let fixedMovies = movies.map(movie => {
     return {
         ...movie,
         rate: +movie.rate,
-        year: +movie.year
+        year: +movie.year,
+        test: [
+            {
+                a : Math.random() * 100
+            },
+            {
+                b : Math.random() * 100
+            }
+        ]
     }
 })
 // .filter(movie => movie.year > 1960 && movie.director === "Francis Ford Coppola")
