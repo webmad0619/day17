@@ -21,3 +21,7 @@
 
 # find those elements where the test array of objects has an object with its values greater than 70
 {test: {$elemMatch: {a : { $gt: 70 }}}}
+
+# $exists guarantees consistent data structure by removing or allowing certain documents having the field you choose or not having the field you choose. Here you filter out those movies not having the year field and that year being greater that 2000
+
+{$and: [{ year: { $exists: true } }, { year: { $gt: 2000 } }]}

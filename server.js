@@ -1,3 +1,6 @@
+// run this code via node server.js and then import the data via
+// mongoImport --db movies --collection movieNames --jsonArray ./cleanData.json
+
 let movies = [
     {
         "title": "The Shawshank Redemption",
@@ -2969,20 +2972,42 @@ let movies = [
 ]
 
 // most modern way, conveys object cloning + fixing
+// remember we are breaking the data integrity on purpose by randomizing which movies have year and rate
+// this is used for the $exist filter example.
 let fixedMovies = movies.map(movie => {
-    return {
-        ...movie,
-        rate: +movie.rate,
-        year: +movie.year,
-        test: [
-            {
-                a : Math.random() * 100
-            },
-            {
-                b : Math.random() * 100
-            }
-        ]
+    if (Math.random () * 50 > 25) {
+        return {
+            ...movie,
+            rate: +movie.rate,
+            year: +movie.year,
+            test: [
+                {
+                    a : Math.random() * 100
+                },
+                {
+                    b : Math.random() * 100
+                }
+            ]
+        }
+    }   else {
+        var newObj = {
+            ...movie,
+            test: [
+                {
+                    a : Math.random() * 100
+                },
+                {
+                    b : Math.random() * 100
+                }
+            ]
+        }
+
+        delete newObj.rate
+        delete newObj.year
+
+        return newObj 
     }
+    
 })
 // .filter(movie => movie.year > 1960 && movie.director === "Francis Ford Coppola")
 
